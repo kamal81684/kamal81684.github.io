@@ -1,48 +1,25 @@
-"use client";
-import { motion } from "framer-motion";
 import { skillGroups, sections } from "../data/portfolio";
 import SectionHeading from "./SectionHeading";
+import Reveal from "./Reveal";
 
+// Bento grid with hairline gutters.
 export default function Skills() {
   return (
-    <section id="skills" className="mx-auto max-w-6xl px-4 py-24 sm:px-8">
-      <SectionHeading
-        eyebrow="What I work with"
-        title="Skills & Toolkit"
-        subtitle={sections.skills}
-      />
-
-      <div className="mt-14 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {skillGroups.map((group, i) => (
-          <motion.div
-            key={group.title}
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-60px" }}
-            transition={{ delay: i * 0.08, duration: 0.45 }}
-            whileHover={{ y: -6 }}
-            className="group relative overflow-hidden rounded-2xl surface-card p-6 backdrop-blur-xl transition-colors hover:border-primary-400/50"
-          >
-            <div className="absolute -right-8 -top-8 h-24 w-24 rounded-full bg-primary-500/10 blur-2xl transition-opacity group-hover:opacity-100 opacity-0" />
-            <div className="mb-4 flex items-center gap-3">
-              <span className="grid h-11 w-11 place-items-center rounded-xl bg-gradient-to-br from-primary-500/30 to-accent-purple/30 text-primary-600 dark:text-primary-200">
-                <group.icon className="h-5 w-5" strokeWidth={2} />
-              </span>
-              <h3 className="text-lg font-bold text-slate-900 dark:text-white">
-                {group.title}
-              </h3>
-            </div>
-            <div className="flex flex-wrap gap-2">
-              {group.skills.map((skill) => (
-                <span
-                  key={skill}
-                  className="rounded-lg border border-primary-400/25 bg-primary-500/10 px-3 py-1.5 text-sm font-medium text-primary-700 dark:text-primary-100"
-                >
-                  {skill}
+    <section id="skills" className="mx-auto max-w-6xl px-5 py-20 sm:px-8">
+      <SectionHeading index="01" eyebrow="Toolkit" title="Skills" subtitle={sections.skills} />
+      <div className="mt-12 grid gap-px overflow-hidden rounded-3xl border border-line bg-line sm:grid-cols-2 lg:grid-cols-3">
+        {skillGroups.map((g, i) => (
+          <Reveal key={g.title} delay={i * 0.05} className="bg-bg p-7 transition-colors hover:bg-card">
+            <g.icon className="h-5 w-5 text-accent" strokeWidth={1.75} />
+            <h3 className="mt-5 font-serif text-3xl tracking-tight">{g.title}</h3>
+            <div className="mt-5 flex flex-wrap gap-2">
+              {g.skills.map((s) => (
+                <span key={s} className="chip">
+                  {s}
                 </span>
               ))}
             </div>
-          </motion.div>
+          </Reveal>
         ))}
       </div>
     </section>

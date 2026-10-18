@@ -39,7 +39,7 @@ export const profile = {
 export const sections = {
   skills: "What I use to build web apps, APIs and AI pipelines.",
   experience: "Remote internships across AI platforms and full-stack web development.",
-  projects: "Products I've built end to end.",
+  projects: "Products and hackathon builds, end to end.",
 };
 
 export interface SkillGroup {
@@ -157,6 +157,16 @@ export const projects: Project[] = [
     tags: ["Node.js", "Express.js", "MongoDB", "JWT", "RBAC", "AWS S3"],
     repo: "https://github.com/kamal81684/streamFlix",
     accent: "from-rose-500 to-orange-600",
+  },
+  {
+    id: 3,
+    title: "Vyapar-AI",
+    description:
+      "Pricing engine for new-to-online sellers, built for Meesho DICE Season 3 (Team Imaginating). Sets a Day-0 launch price from real costs plus RTO and return risk, never below break-even, using similar-listing competitor bands and a LightGBM return-risk model; then re-prices across the product lifecycle with a guard-railed LinUCB bandit and sends Hinglish WhatsApp-style nudges. FastAPI service with a web UI and a simulated backtest.",
+    tags: ["Python", "FastAPI", "LightGBM", "LinUCB Bandit", "Pricing ML"],
+    link: "https://meesho-dice-challenge.onrender.com/",
+    repo: "https://github.com/kamal81684/meesho-dice-challenge",
+    accent: "from-amber-500 to-orange-600",
   },
 ];
 

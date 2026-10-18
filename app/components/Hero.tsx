@@ -1,158 +1,77 @@
 "use client";
 import Image from "next/image";
-import Link from "next/link";
 import { motion } from "framer-motion";
-import { FaGithub, FaLinkedin, FaInstagram } from "react-icons/fa";
-import { Mail } from "lucide-react";
+import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { profile } from "../data/portfolio";
 
+const rise = (delay: number) => ({ initial: { opacity: 0, y: 24 }, animate: { opacity: 1, y: 0 }, transition: { duration: 0.7, delay, ease: [0.22, 1, 0.36, 1] as const } });
+
 export default function Hero() {
+  const [first, ...rest] = profile.name.split(" ");
   return (
-    <section className="relative flex min-h-[100svh] flex-col items-center justify-center overflow-hidden px-4 pb-10 pt-24">
-      {/* Animated gradient blobs */}
-      <div className="pointer-events-none absolute inset-0 -z-10">
-        <div className="absolute -top-40 -left-20 h-[28rem] w-[28rem] rounded-full bg-primary-500/30 blur-[120px] animate-pulse-slow" />
-        <div className="absolute top-1/3 -right-20 h-[26rem] w-[26rem] rounded-full bg-accent-purple/30 blur-[120px] animate-pulse-slow" />
-        <div className="absolute bottom-0 left-1/3 h-72 w-72 rounded-full bg-accent-pink/20 blur-[120px] animate-pulse-slow" />
-      </div>
+    <section id="top" className="mx-auto max-w-6xl px-5 pb-20 pt-28 sm:px-8 sm:pt-32">
+      <motion.div {...rise(0)} className="label flex items-center justify-between">
+        <span>Portfolio — {profile.location}</span>
+        <span className="flex items-center gap-2">
+          <span className="relative flex h-1.5 w-1.5">
+            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-60" />
+            <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-accent" />
+          </span>
+          Open to opportunities
+        </span>
+      </motion.div>
 
-      <div className="mx-auto grid w-full max-w-6xl grid-cols-1 items-center gap-12 md:grid-cols-[1.3fr_1fr]">
-        {/* Left: copy */}
-        <div className="text-center md:text-left">
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="mb-5 inline-flex items-center gap-2 rounded-full border border-primary-400/30 bg-primary-400/10 px-4 py-1.5 text-sm font-medium text-primary-200 backdrop-blur"
-          >
-            <span className="relative flex h-2 w-2">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary-400 opacity-75" />
-              <span className="relative inline-flex h-2 w-2 rounded-full bg-primary-400" />
-            </span>
-            Open to opportunities · {profile.tagline}
-          </motion.div>
-
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1, duration: 0.5 }}
-            className="text-4xl font-extrabold leading-tight tracking-tight sm:text-6xl"
-          >
-            <span className="text-slate-900 dark:text-white">Hi, I&apos;m </span>
-            <span className="bg-gradient-to-r from-primary-400 via-accent-purple to-accent-pink bg-clip-text text-transparent">
-              {profile.name}
-            </span>
+      <div className="mt-10 grid gap-10 md:grid-cols-[1fr_auto] md:items-end md:gap-14">
+        <div>
+          <motion.h1 {...rise(0.08)} className="font-serif text-[clamp(4rem,13vw,10rem)] leading-[0.86] tracking-[-0.03em]">
+            {first}
+            <br />
+            <em className="text-accent">{rest.join(" ")}</em>
           </motion.h1>
-
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.25, duration: 0.5 }}
-            className="mx-auto mt-5 max-w-xl text-lg leading-relaxed text-slate-600 dark:text-slate-300 md:mx-0"
-          >
-            {profile.headline}
+          <motion.p {...rise(0.18)} className="mt-8 max-w-xl text-lg leading-relaxed text-muted">
+            <span className="text-fg">{profile.role}.</span> {profile.headline}
           </motion.p>
-
-          {/* CTAs */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4, duration: 0.5 }}
-            className="mt-8 flex flex-wrap items-center justify-center gap-4 md:justify-start"
-          >
-            <a
-              href="#projects"
-              className="rounded-xl bg-gradient-to-r from-primary-500 to-accent-purple px-6 py-3 font-semibold text-white shadow-lg shadow-primary-500/25 transition-transform hover:scale-105"
-            >
-              View my work
+          <motion.div {...rise(0.26)} className="mt-8 flex flex-wrap items-center gap-3">
+            <a href="#projects" className="btn-solid">
+              View work <ArrowRight className="h-4 w-4" />
             </a>
             {profile.resumeUrl ? (
-              <Link
-                href={profile.resumeUrl}
-                target="_blank"
-                className="rounded-xl border border-slate-300/60 bg-white/5 px-6 py-3 font-semibold text-slate-700 backdrop-blur transition-colors hover:bg-white/10 dark:border-white/20 dark:text-white"
-              >
+              <a href={profile.resumeUrl} target="_blank" rel="noreferrer" className="btn-line">
                 Resume
-              </Link>
+              </a>
             ) : (
-              <a
-                href="#contact"
-                className="rounded-xl border border-slate-300/60 bg-white/5 px-6 py-3 font-semibold text-slate-700 backdrop-blur transition-colors hover:bg-white/10 dark:border-white/20 dark:text-white"
-              >
+              <a href="#contact" className="btn-line">
                 Get in touch
               </a>
             )}
-          </motion.div>
-
-          {/* Socials */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.55, duration: 0.5 }}
-            className="mt-8 flex items-center justify-center gap-5 text-2xl text-slate-500 dark:text-slate-400 md:justify-start"
-          >
-            {profile.socials.github && (
-              <a href={profile.socials.github} target="_blank" rel="noreferrer" aria-label="GitHub" className="transition-colors hover:text-primary-400">
-                <FaGithub />
-              </a>
-            )}
-            {profile.socials.linkedin && (
-              <a href={profile.socials.linkedin} target="_blank" rel="noreferrer" aria-label="LinkedIn" className="transition-colors hover:text-primary-400">
-                <FaLinkedin />
-              </a>
-            )}
-            {profile.socials.instagram && (
-              <a href={profile.socials.instagram} target="_blank" rel="noreferrer" aria-label="Instagram" className="transition-colors hover:text-primary-400">
-                <FaInstagram />
-              </a>
-            )}
-            <a href={`mailto:${profile.email}`} aria-label="Email" className="transition-colors hover:text-primary-400">
-              <Mail className="h-6 w-6" />
+            <a href={profile.socials.github} target="_blank" rel="noreferrer" className="label inline-flex sm:ml-2 items-center gap-1 transition-colors hover:text-fg">
+              GitHub <ArrowUpRight className="h-3 w-3" />
+            </a>
+            <a href={`mailto:${profile.email}`} className="label inline-flex items-center gap-1 transition-colors hover:text-fg">
+              Email <ArrowUpRight className="h-3 w-3" />
             </a>
           </motion.div>
         </div>
 
-        {/* Right: portrait */}
-        <motion.div
-          initial={{ scale: 0.8, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          transition={{ delay: 0.2, duration: 0.6 }}
-          className="relative mx-auto"
-        >
-          <div className="absolute inset-0 animate-pulse-slow rounded-full bg-gradient-to-tr from-primary-400 to-accent-purple opacity-50 blur-2xl" />
-          <Image
-            src={profile.image}
-            alt={profile.name}
-            width={300}
-            height={300}
-            priority
-            className="relative z-10 h-56 w-56 rounded-full border-4 border-white/20 object-cover object-center shadow-2xl sm:h-72 sm:w-72"
-          />
-        </motion.div>
+        <motion.figure {...rise(0.14)} className="w-full max-w-[18rem] justify-self-center md:justify-self-end">
+          <div className="overflow-hidden rounded-[1.75rem] border border-line bg-card p-2">
+            <Image src={profile.image} alt={profile.name} width={500} height={625} priority className="aspect-[4/5] w-full rounded-[1.25rem] object-cover" />
+          </div>
+          <figcaption className="label mt-3 flex justify-between">
+            <span>IIT (BHU), Varanasi</span>
+            <span>CSE</span>
+          </figcaption>
+        </motion.figure>
       </div>
 
-      {/* Stat strip: in normal flow below the hero so it lines up with the
-          content and never runs off-screen (framer-motion owns `transform`,
-          so it can't be centred with translate classes). */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.7, duration: 0.5 }}
-        className="mx-auto mt-14 grid w-full max-w-4xl grid-cols-2 gap-3 sm:grid-cols-4 sm:gap-4"
-      >
-        {profile.stats.map((s) => (
-          <div
-            key={s.label}
-            className="rounded-2xl surface-card px-4 py-3 text-center backdrop-blur-xl"
-          >
-            <div className="bg-gradient-to-r from-primary-300 to-accent-purple bg-clip-text text-2xl font-bold text-transparent">
-              {s.value}
-            </div>
-            <div className="mt-0.5 text-xs text-slate-500 dark:text-slate-400">{s.label}</div>
+      <motion.dl {...rise(0.34)} className="mt-16 grid grid-cols-2 border-y border-line sm:grid-cols-4">
+        {profile.stats.map((s, i) => (
+          <div key={s.label} className={`px-1 py-6 sm:px-6 ${i % 2 ? "border-l" : ""} ${i >= 2 ? "border-t sm:border-t-0" : ""} ${i === 2 ? "sm:border-l" : ""} border-line`}>
+            <dd className="font-serif text-5xl leading-none tracking-tight">{s.value}</dd>
+            <dt className="label mt-3">{s.label}</dt>
           </div>
         ))}
-      </motion.div>
-
+      </motion.dl>
     </section>
   );
 }

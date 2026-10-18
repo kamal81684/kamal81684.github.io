@@ -1,45 +1,21 @@
-"use client";
-import { motion } from "framer-motion";
 import { education } from "../data/portfolio";
 import SectionHeading from "./SectionHeading";
-import Avatar from "./Avatar";
+import Reveal from "./Reveal";
 
 export default function EducationSection() {
   return (
-    <section id="education" className="mx-auto max-w-6xl px-4 py-24 sm:px-8">
-      <SectionHeading eyebrow="Academics" title="Education" />
-
-      <div className="mt-14 grid grid-cols-1 gap-6 md:grid-cols-3">
-        {education.map((edu, i) => (
-          <motion.div
-            key={edu.id}
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-60px" }}
-            transition={{ delay: i * 0.08, duration: 0.45 }}
-            whileHover={{ y: -6 }}
-            className="flex flex-col rounded-2xl surface-card p-6 backdrop-blur-xl transition-colors hover:border-primary-400/50"
-          >
-            <div className="flex items-center gap-3">
-              <Avatar name={edu.institution} size={52} />
-              <div>
-                <h3 className="font-bold leading-snug text-slate-900 dark:text-white">
-                  {edu.institution}
-                </h3>
-                <p className="text-sm text-primary-500 dark:text-primary-300">
-                  {edu.degree}
-                </p>
-              </div>
+    <section id="education" className="mx-auto max-w-6xl px-5 py-20 sm:px-8">
+      <SectionHeading index="05" eyebrow="Academics" title="Education" />
+      <div className="mt-12">
+        {education.map((edu) => (
+          <Reveal key={edu.id} className="grid gap-2 border-t border-line py-8 md:grid-cols-[13rem_1fr_auto] md:items-baseline md:gap-10">
+            <div className="label">{edu.startDate ? `${edu.startDate} — ${edu.endDate}` : edu.endDate}</div>
+            <div>
+              <h3 className="font-serif text-3xl leading-tight tracking-tight">{edu.institution}</h3>
+              <p className="mt-1 text-muted">{edu.degree}</p>
             </div>
-            <div className="mt-auto flex items-start justify-between gap-3 pt-4 text-sm">
-              <span className="font-semibold text-slate-700 dark:text-slate-200">
-                {edu.grade}
-              </span>
-              <span className="shrink-0 whitespace-nowrap text-slate-500 dark:text-slate-400">
-                {edu.startDate ? `${edu.startDate} – ${edu.endDate}` : edu.endDate}
-              </span>
-            </div>
-          </motion.div>
+            <div className="font-mono text-sm text-fg">{edu.grade}</div>
+          </Reveal>
         ))}
       </div>
     </section>

@@ -1,5 +1,10 @@
 import "./globals.css";
 import type { Metadata } from "next";
+import { Instrument_Serif, Inter, JetBrains_Mono } from "next/font/google";
+
+const serif = Instrument_Serif({ subsets: ["latin"], weight: "400", style: ["normal", "italic"], variable: "--font-serif" });
+const sans = Inter({ subsets: ["latin"], variable: "--font-sans" });
+const mono = JetBrains_Mono({ subsets: ["latin"], weight: ["400", "500"], variable: "--font-mono" });
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://kamal81684.github.io"),
@@ -19,9 +24,9 @@ export const metadata: Metadata = {
   },
 };
 
-// Runs before paint to apply the saved/preferred theme and avoid a flash.
+// Runs before paint: saved choice, else the system preference (light by default).
 const themeScript = `
-(function(){try{var t=localStorage.getItem('theme');if(t==='light'){document.documentElement.classList.remove('dark');}else{document.documentElement.classList.add('dark');}}catch(e){document.documentElement.classList.add('dark');}})();
+(function(){try{var t=localStorage.getItem('theme');var d=t?t==='dark':window.matchMedia('(prefers-color-scheme: dark)').matches;document.documentElement.classList.toggle('dark',d);}catch(e){}})();
 `;
 
 export default function RootLayout({
@@ -30,7 +35,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }): JSX.Element {
   return (
-    <html lang="en" className="dark" suppressHydrationWarning>
+    <html lang="en" className={`${serif.variable} ${sans.variable} ${mono.variable}`} suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>

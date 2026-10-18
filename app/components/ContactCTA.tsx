@@ -1,62 +1,42 @@
-"use client";
-import { motion } from "framer-motion";
-import { FaGithub, FaLinkedin, FaInstagram } from "react-icons/fa";
-import { Mail } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import { profile } from "../data/portfolio";
+import Reveal from "./Reveal";
 
 export default function ContactCTA() {
+  const year = new Date().getFullYear();
   return (
-    <section id="contact" className="px-4 pb-24 pt-12 sm:px-8">
-      <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.5 }}
-        className="relative mx-auto max-w-4xl overflow-hidden rounded-3xl border border-white/15 bg-gradient-to-br from-primary-500/15 via-accent-purple/10 to-accent-pink/10 p-10 text-center backdrop-blur-xl sm:p-14"
-      >
-        <div className="pointer-events-none absolute -top-20 left-1/2 h-60 w-60 -translate-x-1/2 rounded-full bg-primary-500/20 blur-3xl" />
-        <h2 className="text-3xl font-bold text-slate-900 dark:text-white sm:text-4xl">
-          Let&apos;s build something together
+    <section id="contact" className="mx-auto max-w-6xl px-5 pb-10 pt-20 sm:px-8">
+      <Reveal className="border-t border-line pt-6">
+        <div className="label">06 / Contact</div>
+        <h2 className="mt-8 font-serif text-[clamp(3.25rem,10vw,8.5rem)] leading-[0.9] tracking-[-0.03em]">
+          Let&apos;s build
+          <br />
+          <em className="text-accent">something good.</em>
         </h2>
-        <p className="mx-auto mt-4 max-w-xl text-slate-600 dark:text-slate-300">
-          I&apos;m looking for software engineering roles and always happy to
-          talk about full-stack, AI or competitive programming. Reach out!
+        <p className="mt-8 max-w-xl text-lg text-muted">
+          I&apos;m looking for software engineering roles and always happy to talk about full-stack, AI or competitive programming.
         </p>
-
-        <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
-          <a
-            href={`mailto:${profile.email}`}
-            className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-primary-500 to-accent-purple px-6 py-3 font-semibold text-white shadow-lg shadow-primary-500/25 transition-transform hover:scale-105"
-          >
-            <Mail className="h-5 w-5" /> Email me
-          </a>
-          <a
-            href={profile.socials.github}
-            target="_blank"
-            rel="noreferrer"
-            className="inline-flex items-center gap-2 rounded-xl border border-slate-300/60 bg-white/5 px-6 py-3 font-semibold text-slate-700 backdrop-blur transition-colors hover:bg-white/10 dark:border-white/20 dark:text-white"
-          >
-            <FaGithub /> GitHub
-          </a>
+        <a href={`mailto:${profile.email}`} className="link-underline mt-8 inline-block break-all font-serif text-3xl sm:text-5xl">
+          {profile.email}
+        </a>
+        <div className="mt-8 flex flex-wrap gap-6">
+          {[
+            ["GitHub", profile.socials.github],
+            ["LinkedIn", profile.socials.linkedin],
+            ["Instagram", profile.socials.instagram],
+          ]
+            .filter(([, url]) => url)
+            .map(([label, url]) => (
+              <a key={label} href={url} target="_blank" rel="noreferrer" className="label inline-flex items-center gap-1 text-fg transition-colors hover:text-accent">
+                {label} <ArrowUpRight className="h-3 w-3" />
+              </a>
+            ))}
         </div>
-
-        <div className="mt-8 flex items-center justify-center gap-6 text-2xl text-slate-500 dark:text-slate-400">
-          {profile.socials.linkedin && (
-            <a href={profile.socials.linkedin} target="_blank" rel="noreferrer" aria-label="LinkedIn" className="transition-colors hover:text-primary-400">
-              <FaLinkedin />
-            </a>
-          )}
-          {profile.socials.instagram && (
-            <a href={profile.socials.instagram} target="_blank" rel="noreferrer" aria-label="Instagram" className="transition-colors hover:text-primary-400">
-              <FaInstagram />
-            </a>
-          )}
-        </div>
-
-        <p className="mt-10 text-sm text-slate-500 dark:text-slate-500">
-          © {profile.name} · Built with Next.js, Tailwind & Framer Motion
-        </p>
-      </motion.div>
+      </Reveal>
+      <footer className="label mt-24 flex flex-col justify-between gap-2 border-t border-line pt-6 sm:flex-row">
+        <span>© {year} {profile.name}</span>
+        <span>Built with Next.js · Tailwind CSS</span>
+      </footer>
     </section>
   );
 }

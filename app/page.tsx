@@ -1,0 +1,25 @@
+import Header from "./Header";
+import Hero from "./components/Hero";
+import Skills from "./components/Skills";
+import ExperienceTimeline from "./components/ExperienceTimeline";
+import Projects from "./components/Projects";
+import Achievements from "./components/Achievements";
+import EducationSection from "./components/EducationSection";
+import ContactCTA from "./components/ContactCTA";
+
+export default function Page(): JSX.Element {
+  return (
+    <>
+      <Header />
+      <main>
+        <Hero />
+        <Skills />
+        <ExperienceTimeline />
+        <Projects />
+        <Achievements />
+        <EducationSection />
+        <ContactCTA />
+      </main>
+    </>
+  );
+}

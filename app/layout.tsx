@@ -15,6 +15,7 @@ export const metadata: Metadata = {
     description: "Full-stack web apps, AI pipelines and competitive programming.",
     url: "https://kamal81684.github.io",
     type: "website",
+    images: ["/kamal.jpg"],
   },
 };
 

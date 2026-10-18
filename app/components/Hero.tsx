@@ -1,10 +1,10 @@
 "use client";
+import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { FaGithub, FaLinkedin, FaInstagram } from "react-icons/fa";
 import { Mail } from "lucide-react";
 import { profile } from "../data/portfolio";
-import Avatar from "./Avatar";
 
 export default function Hero() {
   return (
@@ -120,8 +120,14 @@ export default function Hero() {
           className="relative mx-auto"
         >
           <div className="absolute inset-0 animate-pulse-slow rounded-full bg-gradient-to-tr from-primary-400 to-accent-purple opacity-50 blur-2xl" />
-          {/* No photo: a large monogram in the same gradient-ring style */}
-          <Avatar name={profile.name} size={224} className="relative z-10 border-4 border-white/20 shadow-2xl" />
+          <Image
+            src={profile.image}
+            alt={profile.name}
+            width={300}
+            height={300}
+            priority
+            className="relative z-10 h-56 w-56 rounded-full border-4 border-white/20 object-cover object-center shadow-2xl sm:h-72 sm:w-72"
+          />
         </motion.div>
       </div>
 

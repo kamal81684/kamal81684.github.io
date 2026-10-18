@@ -18,6 +18,7 @@ export const profile = {
     "I build full-stack web apps and AI pipelines — real-time collaborative editors, secure backends, and LLM-driven platforms that turn a single topic into a full course.",
   location: "India",
   email: "kamaliitbhucse@gmail.com",
+  image: "/kamal.jpg",
   // Drop a general resume into public/resume.pdf and set this to "/resume.pdf" to show the Resume buttons.
   resumeUrl: "",
   socials: {

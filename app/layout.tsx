@@ -1,5 +1,5 @@
 import "./globals.css";
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Instrument_Serif, Inter, JetBrains_Mono } from "next/font/google";
 
 const serif = Instrument_Serif({ subsets: ["latin"], weight: "400", style: ["normal", "italic"], variable: "--font-serif" });
@@ -14,7 +14,13 @@ export const metadata: Metadata = {
   },
   description:
     "Kamal Kumari — full-stack and AI engineer at IIT (BHU). Real-time collaborative apps, secure backends and LLM pipelines; Codeforces Specialist and CodeChef 3-star.",
-  icons: { icon: "/icon.svg" },
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "48x48" },
+      { url: "/icon.svg", type: "image/svg+xml" },
+    ],
+    apple: "/apple-touch-icon.png",
+  },
   openGraph: {
     title: "Kamal Kumari — Full-Stack & AI Engineer",
     description: "Full-stack web apps, AI pipelines and competitive programming.",
@@ -22,6 +28,14 @@ export const metadata: Metadata = {
     type: "website",
     images: ["/kamal.jpg"],
   },
+};
+
+// Browser chrome tint matches the page background.
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#F0EEE9" },
+    { media: "(prefers-color-scheme: dark)", color: "#141311" },
+  ],
 };
 
 // Runs before paint: saved choice, else the system preference (light by default).
